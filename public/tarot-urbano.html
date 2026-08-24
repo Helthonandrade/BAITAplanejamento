@@ -592,12 +592,14 @@
   }
   #s4 .scene__inner{
     margin-top:0;
+    max-width:1180px;
   }
   #s4 .mechlist-viewport{
     position:relative;
     z-index:1;
-    height:clamp(300px,50vh,480px);
-    margin-top:2.2rem;
+    height:auto;
+    min-height:0;
+    margin-top:clamp(1.15rem,2.2vh,1.8rem);
     overflow:visible;
     padding-top:0.45rem;
     -webkit-mask-image:none;
@@ -605,19 +607,22 @@
   }
   #s4 .mechlist{
     display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    column-gap:clamp(1.5rem,4vw,3rem);
-    row-gap:clamp(1.3rem,2.4vh,2rem);
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    column-gap:clamp(1.1rem,2.6vw,2.2rem);
+    row-gap:clamp(1rem,1.8vh,1.45rem);
     will-change:transform;
     position:relative;
     z-index:1;
     margin-top:0;
   }
   #s4 .mechlist .row{
-    grid-template-columns:42px 1fr;
-    gap:0.9rem;
+    grid-template-columns:36px 1fr;
+    gap:0.7rem;
     min-width:0;
   }
+  #s4 .mechlist .idx{ font-size:clamp(1.2rem,1.5vw,1.5rem); }
+  #s4 .mechlist h3{ font-size:clamp(.94rem,1.08vw,1.08rem); line-height:1.22; }
+  #s4 .mechlist p{ font-size:clamp(.78rem,.9vw,.9rem); line-height:1.48; }
   #s4 .eyebrow,
   #s4 .kicker,
   #s4 .liquid-title,
@@ -685,6 +690,9 @@
       position:relative; top:auto; height:auto; min-height:100vh; overflow:visible;
     }
     .scene-fragments{ opacity:.55; }
+  }
+  @media (min-width:821px) and (max-width:1040px){
+    #s4 .mechlist{ grid-template-columns:repeat(2,minmax(0,1fr)); }
   }
 
   /* ---------- products ---------- */
