@@ -292,9 +292,11 @@
     transition:opacity .85s cubic-bezier(.2,.85,.3,1) var(--d,0ms), transform .85s cubic-bezier(.2,.85,.3,1) var(--d,0ms);
   }
   .tcard.is-dealt{ opacity:1; transform:translateY(0) rotateY(0) rotateZ(0) scale(1); }
-  #s3,#s3 .scene__body,#s3 .gallery-head,#s3 .deck-wrap,#s3 .deck,#s3 .tcard{
-    opacity:1 !important;transform:none !important;filter:none !important;visibility:visible !important;
+  #s3,#s3 .scene__body,#s3 .gallery-head,#s3 .deck-wrap,#s3 .deck{
+    visibility:visible !important;
   }
+  #s3 .tcard{ visibility:visible !important; }
+  #s3 .tcard.transition-piece{ transition:none; }
   #s3 .scene__body{z-index:5}
   .tcard{ outline:none; border-radius:16px; }
   .tcard:focus-visible{ box-shadow:0 0 0 2px var(--ink), 0 0 0 4px var(--gold); }
@@ -1369,7 +1371,7 @@ const NEWSPAPER_PHOTOS = ["data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4Q
     const body = scene.querySelector('.scene__body');
     if (!body) return { scene, body:null, pieces:[], fragments:[] };
     const candidates = Array.from(body.querySelectorAll(
-      'h2, h3, p, .numitem, .flavor-chip, .mechlist .row, .impact-item, .flow-col, .deck-wrap, .sunset-gallery-item, .cta'
+      'h2, h3, p, .numitem, .flavor-chip, .mechlist .row, .impact-item, .flow-col, .tcard, .sunset-gallery-item, .cta'
     )).filter(el => !el.closest('.reveal-stage'));
     const pieces = candidates.filter(el => !candidates.some(other => other !== el && other.contains(el)));
     pieces.forEach(el => el.classList.add('transition-piece'));
@@ -1504,6 +1506,10 @@ const NEWSPAPER_PHOTOS = ["data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4Q
         if (isDigitalDraw) {
           const mechlist = scene.querySelector('.mechlist');
           if (mechlist) mechlist.style.transform = 'none';
+        }
+        if (isTarotDeck) {
+          const tarotDeck = scene.querySelector('.deck');
+          if (tarotDeck) tarotDeck.style.overflow = timeline >= 0.82 ? 'visible' : '';
         }
 
         const vectors = [
