@@ -145,7 +145,42 @@
         linear-gradient(135deg,#17101c,#0b0a10 58%,#101923);
     }
     .flow-canvas{ display:none !important; }
-    .scene{ opacity:1; transform:none; }
+    .scene,
+    .transition-piece,
+    .tcard,
+    .can-item,
+    .can-label,
+    .reveal-media,
+    .reveal-text,
+    .newspaper-card{
+      opacity:1 !important; transform:none !important; filter:none !important;
+      visibility:visible !important;
+    }
+    .liquid-title .lt-base{
+      color:var(--bone) !important;
+      -webkit-text-stroke:0 !important;
+    }
+    .liquid-title .lt-fill{ display:none !important; }
+    .spin-stage{ height:auto !important; min-height:100svh; }
+    .spin-stage__sticky{
+      position:relative !important; top:auto !important; height:auto !important;
+      min-height:100svh; padding:4.5rem 0;
+    }
+    .pour-layer{ display:none !important; }
+    .reveal-stage{ height:auto !important; }
+    .reveal-stage__sticky{
+      position:relative !important; top:auto !important; height:auto !important;
+      min-height:100svh; padding:4.5rem var(--pad-x); gap:1.5rem;
+    }
+    .newspaper-stage{ height:auto !important; }
+    .newspaper-stage__sticky{
+      position:relative !important; top:auto !important; height:auto !important;
+      min-height:0; padding:4rem var(--pad-x); display:grid; gap:1rem;
+    }
+    .newspaper-card{
+      position:relative !important; inset:auto !important; width:100% !important;
+    }
+    .scene-fragments,.media-burst{ display:none !important; }
     .grain{ opacity:.025; }
   }
 
@@ -1285,7 +1320,8 @@
     deckNext.addEventListener('click', () => scrollByCards(1));
   }
 
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const mobileCompat = window.matchMedia('(max-width:900px), (hover:none) and (pointer:coarse)').matches;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches || mobileCompat;
 
   // A single pulse reaches each box, opens into two soft fronts along its
   // borders, reunites at the arrow and continues to the next step.
